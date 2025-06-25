@@ -9,9 +9,13 @@ public class ClickHandler : MonoBehaviour
     [SerializeField] private Deleter _deleter;
 
     private float _scaleMultiplier = 2f;
+
     private int _minCubesCount = 2;
     private int _maxCubesCount = 7;
-    private int _chanceMultiplier = 2;
+
+    private float _splitChance = 100;
+    private float _chanceMultiplier = 0.5f;
+    private bool _isSplit = true;
 
     private void OnEnable()
     {
@@ -28,11 +32,15 @@ public class ClickHandler : MonoBehaviour
         Vector3 position = cube.transform.position;
         float scale = cube.transform.localScale.x / _scaleMultiplier;
 
-        _deleter.DeleteCube(cube);
-
         int newCubesCount = Random.Range(_minCubesCount, _maxCubesCount);
-        List<Cube> newCubes = _spawner.SpawnCubes(position, scale, newCubesCount, cube.SplitChance / _chanceMultiplier);
+        float newSplitChance = cube.SplitChance * _chanceMultiplier;
 
-        _exploder.Explode(position, newCubes);
+        if (Random.value >= newSplitChance /100)
+        {
+            List<Cube> newCubes = _spawner.SpawnCubes(position, scale, newCubesCount, newSplitChance);
+
+            _exploder.Explode(position, newCubes);
+            _deleter.DeleteCube(cube);
+        }
     }
 }
