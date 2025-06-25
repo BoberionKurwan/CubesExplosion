@@ -33,6 +33,6 @@ public class Controller : MonoBehaviour
         int newCubesCount = Random.Range(_minCubesCount, _maxCubesCount);
         List<Cube> newCubes = _spawner.SpawnCubes(position, scale, newCubesCount, cube.SplitChance / _chanceMultiplier);
 
-        _exploder.Explode(position);
+        _exploder.Explode(position, newCubes);
     }
 }
