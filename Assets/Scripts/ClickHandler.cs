@@ -13,9 +13,7 @@ public class ClickHandler : MonoBehaviour
     private int _minCubesCount = 2;
     private int _maxCubesCount = 7;
 
-    private float _splitChance = 100;
     private float _chanceMultiplier = 0.5f;
-    private bool _isSplit = true;
 
     private void OnEnable()
     {
@@ -35,11 +33,15 @@ public class ClickHandler : MonoBehaviour
         int newCubesCount = Random.Range(_minCubesCount, _maxCubesCount);
         float newSplitChance = cube.SplitChance * _chanceMultiplier;
 
-        if (Random.value >= newSplitChance /100)
+        if (Random.value <= cube.SplitChance )
         {
             List<Cube> newCubes = _spawner.SpawnCubes(position, scale, newCubesCount, newSplitChance);
 
             _exploder.Explode(position, newCubes);
+            _deleter.DeleteCube(cube);
+        }
+        else
+        {
             _deleter.DeleteCube(cube);
         }
     }

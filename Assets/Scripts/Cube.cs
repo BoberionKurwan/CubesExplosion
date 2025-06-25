@@ -5,7 +5,7 @@ public class Cube : MonoBehaviour
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private Renderer _renderer;
 
-    public float SplitChance { get; private set; }
+    [field: SerializeField]public float SplitChance { get; private set; }
 
     public void Initialize(float splitChance)
     {

@@ -14,7 +14,6 @@ public class Spawner : MonoBehaviour
             Cube cube = Instantiate(_cube);
             cube.transform.position = centerPosition + Random.insideUnitSphere * scale;
             cube.transform.localScale = Vector3.one * scale;
-
             cube.Initialize(splitChance);
 
             newCubes.Add(cube);
