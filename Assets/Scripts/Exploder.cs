@@ -8,7 +8,6 @@ public class Exploder : MonoBehaviour
 
     public void Explode(Vector3 position, List<Cube> cubes)
     {
-        Collider[] colliders = Physics.OverlapSphere(position, _explosionRadius);
 
         foreach (Cube cube in cubes)
         {
@@ -17,7 +16,7 @@ public class Exploder : MonoBehaviour
             if (rigidbody != null)
             {
                 rigidbody.AddExplosionForce(_explosionForce, position, _explosionRadius);
-            }
+            };
         }
     }
 }
